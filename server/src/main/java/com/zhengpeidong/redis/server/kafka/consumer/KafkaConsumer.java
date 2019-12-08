@@ -1,14 +1,11 @@
-package com.zhengpeidong.redis.server.kafka.listener;
+package com.zhengpeidong.redis.server.kafka.consumer;
 
-import com.alibaba.fastjson.JSON;
 import com.zhengpeidong.redis.server.kafka.model.Protocol;
 import com.zhengpeidong.redis.server.redis.Strategy;
-import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Service;
-import org.springframework.util.StringUtils;
 
 /**
  *kafka消费者
@@ -35,6 +32,16 @@ public class KafkaConsumer {
     }
 
     private String toStrategyBeanName(Protocol protocol){
-        return protocol.getOperator().toLowerCase()+"Strategy";
+        String operator = protocol.getOperator();
+        StringBuilder stringBuilder = new StringBuilder();
+        for (int i = 0; i <operator.length() ; i++) {
+            String ele = operator.charAt(i)+"";
+            if (i==0){
+                stringBuilder.append(ele.toUpperCase());
+            }else {
+                stringBuilder.append(ele.toLowerCase());
+            }
+        }
+        return stringBuilder.toString()+"Strategy";
     }
 }

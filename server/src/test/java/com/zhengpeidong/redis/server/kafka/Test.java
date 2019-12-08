@@ -27,6 +27,12 @@ public class Test {
         Protocol protocol = new Protocol();
         protocol.setOperator("set");
         protocol.setKey("aa");
+        protocol.setValue("测试get方法");
+        producer.send("Kafka_Example_json",JSON.toJSONString(protocol).toLowerCase());
+
+
+        protocol.setOperator("get");
+        protocol.setKey("aa");
         producer.send("Kafka_Example_json",JSON.toJSONString(protocol).toLowerCase());
     }
 

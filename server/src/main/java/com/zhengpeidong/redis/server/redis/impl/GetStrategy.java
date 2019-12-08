@@ -7,18 +7,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 /**
- * @description: set操作
+ * @description: get操作
  * @author: ZhengPeidong
- * @create: 2019-12-07 18:03
+ * @create: 2019-12-08 23:58
  */
-@Component("SetStrategy")
-public class SetStrategy   implements Strategy {
-
+@Component("GetStrategy")
+public class GetStrategy  implements Strategy {
     @Autowired
     Storage storage;
     @Override
     public Object excute(Protocol protocol) {
-       storage.getStringMap().put(protocol.getKey(),protocol.getValue());
-       return true;
+        return storage.getStringMap().get(protocol.getKey());
     }
 }
